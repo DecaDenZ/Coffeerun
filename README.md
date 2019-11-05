@@ -1,2 +1,4 @@
 # Coffeerun
-Второй проект из книги, сайт-магазин
+интернет магазин кофе
+команда для запуска:  browser-sync start --server --files
+"stylesheets/*.css, scripts/*.js, *.html" 
