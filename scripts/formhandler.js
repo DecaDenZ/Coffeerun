@@ -1,0 +1,14 @@
+(function (window){
+   'use strict';
+   var App = window.App || {};
+   var $ = window.jQuery;
+
+   function FormHandler(selector){
+      if (!selector){
+         throw new Error('No selector provided');
+      }
+   }
+
+   App.FormHandler = FormHandler;
+   window.App = App;
+})(window);
