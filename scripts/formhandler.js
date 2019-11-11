@@ -20,7 +20,6 @@
       }
       $('#myModal .btn-primary').on('click', function(){
          console.log('жмяк модальное окно');
-         $('.modal-footer').add
       });
 
    };

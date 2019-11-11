@@ -7,15 +7,11 @@
    var FormHandler = App.FormHandler;
    var myTruck = new Truck('ncc-1701', new DataStore());
    window.myTruck = myTruck;
-
    var formHandler = new FormHandler(FORM_SELECTOR);
       FORM_SELECTOR = '#strengthLevel';
    var rangeHandler = new FormHandler(FORM_SELECTOR);
-   //    FORM_SELECTOR = '#myModal';
-   // var modalHandler = new FormHandler(FORM_SELECTOR);
 
    formHandler.addSubmitHandler(myTruck.createOrder.bind(myTruck));
    rangeHandler.addRangeHandler();
-   // modalHandler.addSubmitHandler( modalHandler)
    console.log(formHandler);
 })(window);
