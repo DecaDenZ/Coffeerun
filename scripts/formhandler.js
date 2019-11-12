@@ -14,6 +14,7 @@
       }
    }
 
+   //функция модального окна срабатывающая при опр условиях
    function modalHandler(data) {
       if (data.size === "Coffee-Zilla" && data.strength === '100' && data.flavor) {
          $('#myModal').modal();
