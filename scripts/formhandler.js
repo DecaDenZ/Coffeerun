@@ -18,15 +18,15 @@
    function modalHandler(data) {
       if (data.size === "Coffee-Zilla" && data.strength === '100' && data.flavor) {
          $('#myModal').modal();
-
          $('#myModal .btn-primary').on('click', function() {
             console.log('жмяк модальное окно');
             if (data.emailAddress) {
                $('#bonus').attr('style', 'visibility: visible');
+            } else {
+              alert('Вы не ввели адрес почты');
             }
          });
       }
-
    };
 
    // функция обработчика события скрывается в метод прототипа, чтобы отделить от остального когда главной функции
