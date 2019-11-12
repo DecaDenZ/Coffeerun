@@ -14,13 +14,17 @@
       }
    }
 
-   function modalHandler(data){
+   function modalHandler(data) {
       if (data.size === "Coffee-Zilla" && data.strength === '100' && data.flavor) {
          $('#myModal').modal();
+
+         $('#myModal .btn-primary').on('click', function() {
+            console.log('жмяк модальное окно');
+            if (data.emailAddress) {
+               $('#bonus').attr('style', 'visibility: visible');
+            }
+         });
       }
-      $('#myModal .btn-primary').on('click', function(){
-         console.log('жмяк модальное окно');
-      });
 
    };
 
@@ -30,24 +34,24 @@
       this.$formElement.on('submit', function(event) {
          event.preventDefault();
          var data = {};
-         $(this).serializeArray().forEach(function (item){
+         $(this).serializeArray().forEach(function(item) {
             data[item.name] = item.value;
-            console.log(item.name + ' is ' +  item.value);
+            console.log(item.name + ' is ' + item.value);
          });
          console.log(data);
-         fn(data);
          modalHandler(data);
+         fn(data);
          this.reset();
          this.elements[0].focus();
          $('.strengthValue').text('');
       });
    };
 
-   FormHandler.prototype.addRangeHandler = function(){
-      this.$formElement.on('change', function(event){
+   FormHandler.prototype.addRangeHandler = function() {
+      this.$formElement.on('change', function(event) {
          event.preventDefault();
          $('.strengthValue').text(event.target.value);
-         $('.strengthValue').attr('style', 'color: hsl('+ (120 - event.target.value) +', 100%, 40%)');
+         $('.strengthValue').attr('style', 'color: hsl(' + (120 - event.target.value) + ', 100%, 40%)');
       });
    };
 
