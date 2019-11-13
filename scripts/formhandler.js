@@ -15,6 +15,7 @@
    };
 
    //функция модального окна срабатывающая при опр условиях
+   // попробоваь вынеси в отдельный модуль
    function modalHandler(data) {
       let $bonusForm = $('#bonus');
       if (data.size === "Coffee-Zilla" && data.strength === '100' && data.flavor) {
