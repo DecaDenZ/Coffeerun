@@ -11,8 +11,8 @@
       this.$formElement = $(selector);
       if (this.$formElement.length === 0) {
          throw new Error('Could not find element with selector: ' + selector);
-      }
-   }
+      };
+   };
 
    //функция модального окна срабатывающая при опр условиях
    function modalHandler(data) {
@@ -23,10 +23,11 @@
             $bonusForm.attr('style', 'visibility: hidden').val('Не выбран');
             $('#myModal .btn-primary').off('click');
             return true;
-         }
+         };
 
          $('#myModal').modal();
          $('#myModal .btn-primary').on('click', function() {
+            console.log(data.emailAddress);
 // если в первый раз почта не была введена, то при повторном нажатии
 //проверка все равно выдает false, даже если почта указана.
             if (data.emailAddress) {
@@ -34,11 +35,14 @@
             } else {
               alert('Вы не ввели адрес почты');
            };
+//отключаем обработчик, чтобы старый обработчик со старыми данными не сработал
+// повторно при следующем запуске модального окна
+           $('#myModal .btn-primary').off('click');
            $('#myModal').modal('hide');
            return false;
          });
 
-      }
+      };
    };
 
    // функция обработчика события скрывается в метод прототипа, чтобы отделить от остального когда главной функции
