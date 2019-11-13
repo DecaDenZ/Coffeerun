@@ -43,6 +43,11 @@
       this.$element = $div;
    }
 
+   CheckList.prototype.addRow = function (coffeeOrder){
+     var rowElement = new Row(coffeeOrder);
+     this.$element.append(rowElement.$element);
+   }
+
    App.CheckList = CheckList;
    window.App = App;
 })(window);
