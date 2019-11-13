@@ -16,16 +16,28 @@
 
    //функция модального окна срабатывающая при опр условиях
    function modalHandler(data) {
+      let $bonusForm = $('#bonus');
       if (data.size === "Coffee-Zilla" && data.strength === '100' && data.flavor) {
+
+         if ($bonusForm.attr('style') === 'visibility: visible') {
+            $bonusForm.attr('style', 'visibility: hidden').val('Не выбран');
+            $('#myModal .btn-primary').off('click');
+            return true;
+         }
+
          $('#myModal').modal();
          $('#myModal .btn-primary').on('click', function() {
-            console.log('жмяк модальное окно');
+// если в первый раз почта не была введена, то при повторном нажатии
+//проверка все равно выдает false, даже если почта указана.
             if (data.emailAddress) {
-               $('#bonus').attr('style', 'visibility: visible');
+               $bonusForm.attr('style', 'visibility: visible');
             } else {
               alert('Вы не ввели адрес почты');
-            }
+           };
+           $('#myModal').modal('hide');
+           return false;
          });
+
       }
    };
 
@@ -40,7 +52,7 @@
             console.log(item.name + ' is ' + item.value);
          });
          console.log(data);
-         modalHandler(data);
+         if (!modalHandler(data)) return;
          fn(data);
          this.reset();
          this.elements[0].focus();
