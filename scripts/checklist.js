@@ -76,10 +76,13 @@
    };
 
    CheckList.prototype.addClickHandler = function(fn) {
+     var timeoutId = null, clicks = 0;
       this.$element
          .on('click', 'input',
             function(event) {
-               let timeoutId = setTimeout(() => {
+              clicks++;
+              if (clicks === 1)
+               timeoutId = setTimeout(() => {
                   console.log('click');
                   var email = event.target.value;
                   this.removeRow(email);
@@ -89,8 +92,6 @@
 // https://stackoverflow.com/questions/6330431/jquery-bind-double-click-and-single-click-separately/7845282#7845282
          .on('dblclick', 'input',
             function(event) {
-               clearTimeout(timeoutId);
-               clearTimeout(timeoutId - 1);
                alert('dblclick');
             })
    };
