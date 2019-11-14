@@ -29,6 +29,7 @@
             flavor = '#B45F04'
             break;
          case 'mocha':
+         //слишком темный фон, нужно дополнительно изменить цвет шрифта
             flavor = '#3B240B; color: #F5F6CE'
             break;
          default:
@@ -81,13 +82,17 @@
          .on('click', 'input',
             function(event) {
               clicks++;
-              if (clicks === 1)
+              if (clicks === 1){
                timeoutId = setTimeout(() => {
                   console.log('click');
                   var email = event.target.value;
                   this.removeRow(email);
                   fn(email);
                }, 3000);
+             } else {
+               clearTimeout(timerId);
+               clicks = 0;
+             }
             }.bind(this))
 // https://stackoverflow.com/questions/6330431/jquery-bind-double-click-and-single-click-separately/7845282#7845282
          .on('dblclick', 'input',
@@ -95,14 +100,6 @@
                alert('dblclick');
             })
    };
-
-   // CheckList.prototype.addDoubleClickHandler = function(coffeeOrder) {
-   //    this.$element.on('dblclick', 'input',
-   //       function(event) {
-   //          alert('dblclick');
-   //       })
-   // }
-
 
    App.CheckList = CheckList;
    window.App = App;
