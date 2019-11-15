@@ -14,7 +14,6 @@
    var rangeHandler = new FormHandler('#strengthLevel');
 
    checkList.addClickHandler(myTruck.deliverOrder.bind(myTruck));
-   // checkList.addDoubleClickHandler();
    formHandler.addSubmitHandler(function(data){
      myTruck.createOrder.call(myTruck, data);
      checkList.addRow.call(checkList, data);

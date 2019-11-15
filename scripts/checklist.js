@@ -29,8 +29,7 @@
             flavor = '#B45F04'
             break;
          case 'mocha':
-         //слишком темный фон, нужно дополнительно изменить цвет шрифта
-            flavor = '#3B240B; color: #F5F6CE'
+            flavor = '#3B240B; color: #F5F6CE' //слишком темный фон, меняем цвет шрифта
             break;
          default:
             flavor = 'white'
@@ -76,28 +75,42 @@
          .remove();
    };
 
+   CheckList.prototype.blackoutRow = function(email, opacity) {
+      this.$element
+         .find('[value="' + email + '"]')
+         .closest('[data-coffee-order="checkbox"]')
+         .attr('style', 'opacity: ' + opacity);
+   };
+
    CheckList.prototype.addClickHandler = function(fn) {
-     var timeoutId = null, clicks = 0;
+      var timeoutId = null, prevEmail = false;
+
       this.$element
          .on('click', 'input',
             function(event) {
-              clicks++;
-              if (clicks === 1){
-               timeoutId = setTimeout(() => {
-                  console.log('click');
-                  var email = event.target.value;
-                  this.removeRow(email);
-                  fn(email);
-               }, 3000);
-             } else {
-               clearTimeout(timerId);
-               clicks = 0;
-             }
+               var email = event.target.value;
+               // если предыдущее нажатие была на том же поле ( с тем же email),
+                // то считается повторным нажатием
+               if (prevEmail !== email) {
+                  this.blackoutRow(email, 0.25);
+                  timeoutId = setTimeout(() => {
+                     this.removeRow(email);
+                     fn(email); //вызывается функция переданная в модуле main
+                  }, 3000);
+                  prevEmail = email;
+               } else {
+                  clearTimeout(timeoutId);
+                  this.blackoutRow(email, 1); //возвращаем обычную видимость элементу
+                  console.log('stop remove row');
+                  prevEmail = false;
+               }
             }.bind(this))
-// https://stackoverflow.com/questions/6330431/jquery-bind-double-click-and-single-click-separately/7845282#7845282
+         //обработчик двойного клика
          .on('dblclick', 'input',
             function(event) {
-               alert('dblclick');
+               var form = $('.form-group');
+               console.log(form);
+
             })
    };
 
