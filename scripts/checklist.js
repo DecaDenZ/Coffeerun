@@ -75,12 +75,19 @@
          .remove();
    };
 
+   CheckList.prototype.refillForm = function(data){
+     //заполняем форму для редатирования
+   };
+
+//затемнение заказа в сиске по нажатию
    CheckList.prototype.blackoutRow = function(email, opacity) {
       this.$element
          .find('[value="' + email + '"]')
          .closest('[data-coffee-order="checkbox"]')
          .attr('style', 'opacity: ' + opacity);
    };
+
+
 
    CheckList.prototype.addClickHandler = function(fn) {
       var timeoutId = null, prevEmail = false;
