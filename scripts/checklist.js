@@ -45,14 +45,14 @@
          value: coffeeOrder.emailAddress,
       });
 
-      var description = ' [' + coffeeOrder.strength + 'x] ';
+      var description = coffeeOrder.coffee + ' ';
+      description += '(' + coffeeOrder.emailAddress + ') ';
+      description += coffeeOrder.size + ' ';
+
       if (coffeeOrder.flavor) {
          description += coffeeOrder.flavor + ' ';
-      }
-
-      description += coffeeOrder.size + ' ';
-      description += coffeeOrder.coffee + ', ';
-      description += ' (' + coffeeOrder.emailAddress + ')';
+      };
+      description += '[' + coffeeOrder.strength + 'x]';
 
       $label.append($checkbox);
       $label.append(description);
@@ -75,8 +75,10 @@
          .remove();
    };
 
-   CheckList.prototype.refillForm = function(data){
+   CheckList.prototype.refillForm = function(coffeeOrder){
      //заполняем форму для редатирования
+     // кроме того, чтобы парсить содержимое эл-та row не придумал как получить
+     // данные заказа в этой функции
    };
 
 //затемнение заказа в сиске по нажатию
@@ -86,8 +88,6 @@
          .closest('[data-coffee-order="checkbox"]')
          .attr('style', 'opacity: ' + opacity);
    };
-
-
 
    CheckList.prototype.addClickHandler = function(fn) {
       var timeoutId = null, prevEmail = false;
@@ -116,8 +116,20 @@
          .on('dblclick', 'input',
             function(event) {
                var form = $('.form-group');
-               console.log(form);
+               var order = $(event.target)
+                              .closest("label")
+                              .text()
+                              .split('')
+                              .filter( (elem) => {  // убираем из массива все скобки
+                                 return (elem !== '(' &&
+                                  elem !== ')' &&
+                                  elem !== '[' &&
+                                  elem !== ']')
+                              })
+                              .join('') // пересобираем массив - формируем строку
+                              .split(' '); //и разделяем по пробелам
 
+               console.log(form);
             })
    };
 
