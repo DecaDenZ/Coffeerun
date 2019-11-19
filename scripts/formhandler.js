@@ -26,17 +26,13 @@
          };
          $('#myModal').modal();
          $('#myModal .btn-primary').on('click', function() {
-            if (data.emailAddress) {
-               $bonusForm.attr('style', 'visibility: visible');
-            } else {
-              alert('Вы не ввели адрес почты');
-           };
-           $('#myModal .btn-primary').off('click');
-           $('#myModal').modal('hide');
-           return false;
+            $bonusForm.attr('style', 'visibility: visible');
+            $('#myModal .btn-primary').off('click');
+            $('#myModal').modal('hide');
+            return false;
          });
       } else {
-        return true;
+         return true;
       };
    };
 
@@ -56,6 +52,15 @@
          this.reset();
          this.elements[0].focus();
          $('.strengthValue').text('');
+      });
+   };
+
+   FormHandler.prototype.addInputHandler = function (fn) {
+      console.log('Setting input handler for form');
+      this.$formElement.on('input', '[name="emailAddress"]', function(event){
+         // обработка события
+         var emailAddress = event.target.value;
+         console.log(fn(emailAddress));
       });
    };
 

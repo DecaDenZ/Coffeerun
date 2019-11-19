@@ -1,0 +1,16 @@
+.panel-body {
+   background-color: #3399CC;
+}
+.checkbox label {
+   border-radius: 5px;
+   border: solid 1px;
+   padding: 4px;
+}
+.checkbox {
+   padding-left: 10px;
+}
+
+.strengthValue {
+   font-weight: bold;
+   font-size: 20px;
+}

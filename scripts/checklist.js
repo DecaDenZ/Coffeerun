@@ -33,7 +33,7 @@
             flavor = '#3B240B; color: #F5F6CE' //слишком темный фон, меняем цвет шрифта
             break;
          default:
-            flavor = 'white'
+            flavor = ''
       };
 
       var $label = $('<label></label', {
@@ -114,9 +114,9 @@
                }
             }.bind(this))
          //обработчик двойного клика
+         // при двойном клике заполняем форму данными заказ для редактирования
          .on('dblclick', 'input',
             function(event) {
-               var form = $('.form-group');
                var order = $(event.target)
                               .closest("label")
                               .text()
@@ -131,12 +131,13 @@
                               .split(' '); //и разделяем по пробелам
 
                // прямой и простой вариант заполнения формы, но максимально понятный и быстрый
+               var form = $('.form-group');
                form.find("[name='coffee']").val(order[0]);
                form.find("[name='emailAddress']").val(order[1]);
                form.find("[name='size']").val(order[2]);
                form.find("[name='flavor']").val(order[3]);
-               form.find("[name='strength']").val(order[4]);
-               form.find("[name='bonus']").val(order[5]);
+               form.find("[name='strength']").val(order[4].slice(0, order[4].indexOf('x')));
+               // form.find("[name='bonus']").val(order[5]);
             })
    };
 
