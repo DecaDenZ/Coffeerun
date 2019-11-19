@@ -20,6 +20,7 @@
          'class': 'checkbox'
       });
 
+      //подсветка строки заказа в зависимости от выбора ароматизатора
       var flavor;
       switch (coffeeOrder.flavor) {
          case 'caramel':
@@ -76,7 +77,7 @@
    };
 
    CheckList.prototype.refillForm = function(coffeeOrder){
-     //заполняем форму для редатирования
+     //заполняем форму для редактирования
      // кроме того, чтобы парсить содержимое эл-та row не придумал как получить
      // данные заказа в этой функции
    };
@@ -129,7 +130,13 @@
                               .join('') // пересобираем массив - формируем строку
                               .split(' '); //и разделяем по пробелам
 
-               console.log(form);
+               // прямой и простой вариант заполнения формы, но максимально понятный и быстрый
+               form.find("[name='coffee']").val(order[0]);
+               form.find("[name='emailAddress']").val(order[1]);
+               form.find("[name='size']").val(order[2]);
+               form.find("[name='flavor']").val(order[3]);
+               form.find("[name='strength']").val(order[4]);
+               form.find("[name='bonus']").val(order[5]);
             })
    };
 
