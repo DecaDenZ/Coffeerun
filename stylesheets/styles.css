@@ -1,3 +1,7 @@
+form :focus:required:invalid {
+   border-color: #a94442;
+}
+
 .panel-body {
    background-color: #3399CC;
 }

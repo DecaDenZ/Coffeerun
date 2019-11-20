@@ -55,12 +55,31 @@
       });
    };
 
-   FormHandler.prototype.addInputHandler = function (fn) {
+   FormHandler.prototype.addInputHandler = function (validation) {
       console.log('Setting input handler for form');
+
       this.$formElement.on('input', '[name="emailAddress"]', function(event){
          // обработка события
          var emailAddress = event.target.value;
-         console.log(fn(emailAddress));
+         var message = '';
+         if (validation.isCompanyEmail(emailAddress)) {
+            event.target.setCustomValidity('');
+         } else {
+            message = emailAddress + ' is not an authorized email address!';
+            event.target.setCustomValidity(message);
+         }
+      });
+
+      this.$formElement.on('input', '[name="coffee"]', function(event){
+         // обработка события
+         var order = event.target.value;
+         var message = '';
+         if (validation.isDecaf(order)) {
+            event.target.setCustomValidity('');
+         } else {
+            message = order + ' is too strong, you need to decrase coffeine rating!';
+            event.target.setCustomValidity(message);
+         }
       });
    };
 

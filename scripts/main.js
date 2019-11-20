@@ -20,7 +20,7 @@
      checkList.addRow.call(checkList, data);
    });
 
-   formHandler.addInputHandler(Validation.isCompanyEmail);
+   formHandler.addInputHandler(Validation);
 
    rangeHandler.addRangeHandler();
    console.log(formHandler);
