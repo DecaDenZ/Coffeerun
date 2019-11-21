@@ -55,10 +55,10 @@
       });
    };
 
-   FormHandler.prototype.addInputHandler = function (validation) {
+   FormHandler.prototype.addInputHandler = function(validation) {
       console.log('Setting input handler for form');
 
-      this.$formElement.on('input', '[name="emailAddress"]', function(event){
+      this.$formElement.on('input', '[name="emailAddress"]', function(event) {
          // обработка события
          var emailAddress = event.target.value;
          var message = '';
@@ -69,18 +69,35 @@
             event.target.setCustomValidity(message);
          }
       });
+      var coffee = '', strength = 30;
+      this.$formElement
+         .on('input', '[name="coffee"]', function(event) {
+            // обработка события
+            coffee = event.target.value;
+            var message = '';
+            if (validation.isDecaf(coffee, strength)) {
+               event.target.setCustomValidity('');
+            } else {
+               message = coffee + ' is too strong, you need to decrase coffeine rating!';
+               event.target.setCustomValidity(message);
+            }
+         })
+         .on('input', '[name="strength"]', function(event) {
+            strength = event.target.value;
+            console.log('strength', coffee, strength);
 
-      this.$formElement.on('input', '[name="coffee"]', function(event){
-         // обработка события
-         var order = event.target.value;
-         var message = '';
-         if (validation.isDecaf(order)) {
-            event.target.setCustomValidity('');
-         } else {
-            message = order + ' is too strong, you need to decrase coffeine rating!';
-            event.target.setCustomValidity(message);
-         }
-      });
+            // при изменении значения крепости кофе, обработчик на поле заказа не запускается,
+            // поэтому значение крепости там, не меняется. необходимо при изменении значения крепости
+            // как-то перезапускать обработчик поля заказа
+            var message = '';
+            if (validation.isDecaf(coffee, strength)) {
+               event.target.setCustomValidity('');
+            } else {
+               message = coffee + ' is too strong, you need to decrase coffeine rating!';
+               event.target.setCustomValidity(message);
+            }
+
+         });
    };
 
    FormHandler.prototype.addRangeHandler = function() {

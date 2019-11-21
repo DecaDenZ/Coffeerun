@@ -3,11 +3,11 @@
    var App = window.App || {};
    var Validation = {
       isCompanyEmail: function (email){
-         return /.+@bignerdranch\.com$/.test(email);
+         return /.+@gmail\.com$/.test(email);
       },
 
       isDecaf: function (order, strength){
-         if ((string.indexOf('decaf') !== -1) && (number > 20)){
+         if ((order.indexOf('decaf') !== -1) && (strength > 20)){
             return false;
          } else {
             return true;
