@@ -58,7 +58,8 @@
    FormHandler.prototype.addInputHandler = function(validation) {
       console.log('Setting input handler for form');
 
-      this.$formElement.on('input', '[name="emailAddress"]', function(event) {
+      this.$formElement
+      .on('input', '[name="emailAddress"]', function(event) {
          // обработка события
          var emailAddress = event.target.value;
          var message = '';
@@ -68,12 +69,13 @@
             message = emailAddress + ' is not an authorized email address!';
             event.target.setCustomValidity(message);
          }
-      });
+      }.bind(this));
       var coffee = '', strength = 30;
       this.$formElement
          .on('input', '[name="coffee"]', function(event) {
             // обработка события
             coffee = event.target.value;
+            strength = $('[name="strength"]').val();
             var message = '';
             if (validation.isDecaf(coffee, strength)) {
                $(event.target).setCustomValidity('');
@@ -85,14 +87,21 @@
          .on('input', '[name="strength"]', function(event) {
             strength = event.target.value;
             var message = '';
+
             if (validation.isDecaf(coffee, strength)) {
-               $(event.target).setCustomValidity('');
+               $('[name="coffee"]').setCustomValidity('');
             } else {
                message = coffee + ' is too strong, you need to decrase coffeine rating!';
-               $(event.target).setCustomValidity(message);
+               $('[name="coffee"]').setCustomValidity(message);
             }
-
          });
+
+         // if (validation.isDecaf(coffee, strength)) {
+         //    $(event.target).setCustomValidity('');
+         // } else {
+         //    message = coffee + ' is too strong, you need to decrase coffeine rating!';
+         //    $(event.target).setCustomValidity(message);
+         // }
    };
 
    FormHandler.prototype.addRangeHandler = function() {

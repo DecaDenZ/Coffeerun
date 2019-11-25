@@ -138,7 +138,7 @@
                form.find("[name='flavor']").val(order[3]);
                form.find("[name='strength']").val(order[4].slice(0, order[4].indexOf('x')));
                // form.find("[name='bonus']").val(order[5]);
-            })
+            }.bind(this))
    };
 
    App.CheckList = CheckList;
