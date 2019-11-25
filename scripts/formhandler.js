@@ -76,25 +76,20 @@
             coffee = event.target.value;
             var message = '';
             if (validation.isDecaf(coffee, strength)) {
-               event.target.setCustomValidity('');
+               $(event.target).setCustomValidity('');
             } else {
                message = coffee + ' is too strong, you need to decrase coffeine rating!';
-               event.target.setCustomValidity(message);
+               $(event.target).setCustomValidity(message);
             }
          })
          .on('input', '[name="strength"]', function(event) {
             strength = event.target.value;
-            console.log('strength', coffee, strength);
-
-            // при изменении значения крепости кофе, обработчик на поле заказа не запускается,
-            // поэтому значение крепости там, не меняется. необходимо при изменении значения крепости
-            // как-то перезапускать обработчик поля заказа
             var message = '';
             if (validation.isDecaf(coffee, strength)) {
-               event.target.setCustomValidity('');
+               $(event.target).setCustomValidity('');
             } else {
                message = coffee + ' is too strong, you need to decrase coffeine rating!';
-               event.target.setCustomValidity(message);
+               $(event.target).setCustomValidity(message);
             }
 
          });
