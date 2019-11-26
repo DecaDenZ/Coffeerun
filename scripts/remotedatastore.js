@@ -11,7 +11,7 @@
    }
 
    RemoteDataStore.prototype.add = function(key, val) {
-      $.ajax(this.serverUrl + '/' + key, {
+      return $.ajax(this.serverUrl + '/' + key, {
          type: 'GET',
          context: this,
          success: function(serverResponse) {
@@ -23,29 +23,30 @@
                   console.log(serverResponse, this.serverUrl);
                });
             }
-         },
-         error: function() {
-            throw new Errror('Server error');
          }
       });
    };
 
    RemoteDataStore.prototype.getAll = function(cb) {
-      $.get(this.serverUrl, function(serverResponse) {
-         console.log(serverResponse);
-         cb(serverResponse);
+      return $.get(this.serverUrl, function(serverResponse) {
+         if (cb) {
+            console.log(serverResponse);
+            cb(serverResponse);
+         }
       });
    };
 
    RemoteDataStore.prototype.get = function(key, cb) {
-      $.get(this.serverUrl + '/' + key, function(serverResponse) {
-         console.log(serverResponse);
-         cb(serverResponse);
+      return $.get(this.serverUrl + '/' + key, function(serverResponse) {
+         if (cb) {
+            console.log(serverResponse);
+            cb(serverResponse);
+         }
       });
    };
 
    RemoteDataStore.prototype.remove = function(key, cb) {
-      $.ajax(this.serverUrl + '/' + key, {
+      return $.ajax(this.serverUrl + '/' + key, {
          type: 'DELETE'
       });
    };

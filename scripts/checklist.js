@@ -33,7 +33,7 @@
             flavor = '#3B240B; color: #F5F6CE' //слишком темный фон, меняем цвет шрифта
             break;
          default:
-            flavor = ''
+            flavor = 'white'
       };
 
       var $label = $('<label></label', {
@@ -76,12 +76,6 @@
          .remove();
    };
 
-   CheckList.prototype.refillForm = function(coffeeOrder){
-     //заполняем форму для редактирования
-     // кроме того, чтобы парсить содержимое эл-та row не придумал как получить
-     // данные заказа в этой функции
-   };
-
 //затемнение заказа в сиске по нажатию
    CheckList.prototype.blackoutRow = function(email, opacity) {
       this.$element
@@ -102,8 +96,10 @@
                if (prevEmail !== email) {
                   this.blackoutRow(email, 0.25);
                   timeoutId = setTimeout(() => {
-                     this.removeRow(email);
-                     fn(email); //вызывается функция переданная в модуле main
+                     fn(email) //вызывается функция переданная в модуле main, deffered
+                        .then(() => {
+                           this.removeRow(email);
+                        });
                   }, 3000);
                   prevEmail = email;
                } else {

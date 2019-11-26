@@ -42,16 +42,18 @@
       this.$formElement.on('submit', function(event) {
          event.preventDefault();
          var data = {};
-         $(this).serializeArray().forEach(function(item) {
+         $(this).serializeArray().forEach((item) => {
             data[item.name] = item.value;
             console.log(item.name + ' is ' + item.value);
          });
          console.log(data);
          if (!modalHandler(data)) return;
-         fn(data);
-         this.reset();
-         this.elements[0].focus();
-         $('.strengthValue').text('');
+         fn(data)  // возвращает deferred
+            .then(() => {
+               this.reset();
+               this.elements[0].focus();
+            });
+         $('.strengthValue').text(''); // убирает значение крепости около заголовка формы
       });
    };
 
@@ -95,13 +97,6 @@
                $('[name="coffee"]').setCustomValidity(message);
             }
          });
-
-         // if (validation.isDecaf(coffee, strength)) {
-         //    $(event.target).setCustomValidity('');
-         // } else {
-         //    message = coffee + ' is too strong, you need to decrase coffeine rating!';
-         //    $(event.target).setCustomValidity(message);
-         // }
    };
 
    FormHandler.prototype.addRangeHandler = function() {
